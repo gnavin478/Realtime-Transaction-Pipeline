@@ -3,7 +3,8 @@ from pyspark.sql.functions import(
     col, sum, count, avg, current_timestamp, year, month, dayofmonth, quarter, date_format
 )
 from utils.logger import get_logger
-logger = get_logger("pyspark_streaming/gold", "gold_aggregation.log")
+from utils.constants import CUSTOMER_TABLE,CUSTOMER_CHECKPOINT,PRODUCT_TABLE,PRODUCT_CHECKPOINT,PAYMENT_TABLE,PAYMENT_CHECKPOINT,LOCATION_TABLE,LOCATION_CHECKPOINT,DATE_TABLE,DATE_CHECKPOINT,FACT_TRANSACTION_TABLE,FACT_TRANSACTION_CHECKPOINT
+logger = get_logger("gold", "gold_aggregation.log")
 
 def create_spark_session():
     try:
@@ -218,41 +219,41 @@ def main():
     dim_location_df = create_dim_location(silver_df)
     dim_date_df = create_dim_date(silver_df)
     fact_transactions_df = create_fact_transactions(silver_df)
-
+ 
     write_gold_table(
         dim_customer_df,
-        "dim_customer",
-        "/Volumes/workspace/transaction_data_pipeline/gold/checkpoints/dim_customer"
+        CUSTOMER_TABLE,
+        CUSTOMER_CHECKPOINT
     )
 
     write_gold_table(
         dim_product_df,
-        "dim_product",
-        "/Volumes/workspace/transaction_data_pipeline/gold/checkpoints/dim_product"
+        PRODUCT_TABLE,
+        PRODUCT_CHECKPOINT
     )
 
     write_gold_table(
         dim_payment_df,
-        "dim_payment",
-        "/Volumes/workspace/transaction_data_pipeline/gold/checkpoints/dim_payment"
+        PAYMENT_TABLE,
+        PAYMENT_CHECKPOINT
     )
 
     write_gold_table(
         dim_location_df,
-        "dim_location",
-        "/Volumes/workspace/transaction_data_pipeline/gold/checkpoints/dim_location"
+        LOCATION_TABLE,
+        LOCATION_CHECKPOINT
     )
 
     write_gold_table(
         dim_date_df,
-        "dim_date",
-        "/Volumes/workspace/transaction_data_pipeline/gold/checkpoints/dim_date"
+        DATE_TABLE,
+        DATE_CHECKPOINT
     )
 
     write_gold_table(
         fact_transactions_df,
-        "fact_transactions",
-        "/Volumes/workspace/transaction_data_pipeline/gold/checkpoints/fact_transactions"
+        FACT_TRANSACTION_TABLE,
+        FACT_TRANSACTION_CHECKPOINT
     )
 
 

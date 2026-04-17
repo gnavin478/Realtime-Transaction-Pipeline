@@ -11,9 +11,10 @@ from kafka_producer.config import (
     EVENTS_PER_BATCH,
     SLEEP_SECONDS
 )
+from utils.constants import BRONZE_CHECKPOINT, BRONZE_TABLE
 
 from utils.logger import get_logger
-logger = get_logger("pyspark_streaming/bronze", "bronze_ingest.log")
+logger = get_logger("bronze", "bronze_ingest.log")
 
 def create_spark_session():
     try:
@@ -120,11 +121,8 @@ def write_to_delta(parsed_df):
             .outputMode("append")
             .option("mergeSchema", "true")
             .trigger(availableNow=True)
-            .option(
-                "checkpointLocation",
-                "/Volumes/workspace/transaction_data_pipeline/bronze/checkpoints/bronze_transactions"
-            )
-            .toTable("bronze_transactions")
+            .option("checkpointLocation",BRONZE_CHECKPOINT)
+            .toTable(BRONZE_TABLE)
         )
 
         logger.info("Streaming query started successfully")

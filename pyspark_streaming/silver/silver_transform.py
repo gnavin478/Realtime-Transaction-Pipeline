@@ -7,8 +7,8 @@ from pyspark.sql.functions import (
     current_timestamp
 )
 from utils.logger import get_logger
-
-logger = get_logger("pyspark_streaming/silver", "silver_transform.log")
+from utils.constants import SILVER_TABLE, SILVER_CHECKPOINT
+logger = get_logger("silver", "silver_transform.log")
 
 
 def create_spark_session():
@@ -108,13 +108,10 @@ def write_to_silver(silver_df):
             silver_df.writeStream
             .format("delta")
             .outputMode("append")
-            .option(
-                "checkpointLocation",
-                "/Volumes/workspace/transaction_data_pipeline/silver/checkpoints/silver_transactions_v3"
-            )
+            .option("checkpointLocation", SILVER_CHECKPOINT)
             .option("mergeSchema", "true")
             .trigger(availableNow=True)
-            .toTable("silver_transactions")
+            .toTable(SILVER_TABLE)
         )
 
         logger.info("Silver streaming query started successfully")

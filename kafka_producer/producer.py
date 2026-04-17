@@ -24,11 +24,6 @@ logger = get_logger("kafka_producer", "Producer.log")
 def delivery_report(err, msg):
     if err is not None:
         logger.error(f"Delivery failed: {err}")
-    else:
-        logger.info(
-            f"Delivered to topic={msg.topic()} partition={msg.partition()} offset={msg.offset()}"
-        )
-
 
 def run_producer(total_batches=5):
     conf = {
