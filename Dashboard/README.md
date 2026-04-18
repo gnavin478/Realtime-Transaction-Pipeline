@@ -1,9 +1,22 @@
-# Dashboard Queries
+# Databricks Dashboard
 
-This folder contains SQL queries used to build the Databricks dashboard.
+This dashboard is built on top of the Gold layer using Databricks SQL.
 
-The dashboard is built on top of Gold/Silver layer data and provides business insights like:
-- Daily transaction trends
-- Revenue analysis
+## Features
+- Daily revenue trend
 - City-wise performance
 - Payment method distribution
+- Product performance
+- Customer segmentation
+
+## Data Source
+- fact_transactions
+- dim_customer
+- dim_product
+- dim_payment
+- dim_location
+- dim_date
+
+## Tools Used
+- Databricks SQL
+- Delta Lake
