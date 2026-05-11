@@ -18,7 +18,7 @@ from kafka_producer.config import (
 
 from utils.logger import get_logger
 
-logger = get_logger("kafka_producer", "Producer.log")
+logger = get_logger("kafka_producer", "/Volumes/workspace/transaction_data_pipeline/pipeline_logs/Producer.log")
 
 
 def delivery_report(err, msg):

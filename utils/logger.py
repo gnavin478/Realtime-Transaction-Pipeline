@@ -1,26 +1,33 @@
 import logging
 import os
 
-def get_logger(logger_name: str, log_file: str) -> logging.Logger:
-    os.makedirs("logs", exist_ok=True)
-
-    logger = logging.getLogger(logger_name)
+def get_logger(name, log_file):
+    logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
+    logger.propagate = False
 
-    if not logger.handlers:
-        formatter = logging.Formatter(
-            "%(asctime)s | %(name)s | %(levelname)s | %(message)s"
-        )
+    # Important in Databricks notebooks/jobs
+    if logger.handlers:
+        for handler in logger.handlers[:]:
+            handler.close()
+            logger.removeHandler(handler)
 
-        file_handler = logging.FileHandler(f"logs/{log_file}")
-        file_handler.setLevel(logging.INFO)
-        file_handler.setFormatter(formatter)
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
-        console_handler = logging.StreamHandler()
-        console_handler.setLevel(logging.INFO)
-        console_handler.setFormatter(formatter)
+    file_handler = logging.FileHandler(log_file, mode="a", encoding="utf-8")
+    file_handler.setLevel(logging.INFO)
 
-        logger.addHandler(file_handler)
-        logger.addHandler(console_handler)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+
+    formatter = logging.Formatter(
+        "%(asctime)s | %(name)s | %(levelname)s | %(message)s"
+    )
+
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
 
     return logger

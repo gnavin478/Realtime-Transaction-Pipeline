@@ -4,7 +4,7 @@ from pyspark.sql.functions import(
 )
 from utils.logger import get_logger
 from utils.constants import CUSTOMER_TABLE,CUSTOMER_CHECKPOINT,PRODUCT_TABLE,PRODUCT_CHECKPOINT,PAYMENT_TABLE,PAYMENT_CHECKPOINT,LOCATION_TABLE,LOCATION_CHECKPOINT,DATE_TABLE,DATE_CHECKPOINT,FACT_TRANSACTION_TABLE,FACT_TRANSACTION_CHECKPOINT
-logger = get_logger("gold", "gold_aggregation.log")
+logger = get_logger("gold", "/Volumes/workspace/transaction_data_pipeline/pipeline_logs/gold_aggregation.log")
 
 def create_spark_session():
     try:

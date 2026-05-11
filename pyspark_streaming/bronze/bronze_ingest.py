@@ -14,7 +14,7 @@ from kafka_producer.config import (
 from utils.constants import BRONZE_CHECKPOINT, BRONZE_TABLE
 
 from utils.logger import get_logger
-logger = get_logger("bronze", "bronze_ingest.log")
+logger = get_logger("bronze", "/Volumes/workspace/transaction_data_pipeline/pipeline_logs/bronze_ingest.log")
 
 def create_spark_session():
     try:

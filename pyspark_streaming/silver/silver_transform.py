@@ -8,7 +8,7 @@ from pyspark.sql.functions import (
 )
 from utils.logger import get_logger
 from utils.constants import SILVER_TABLE, SILVER_CHECKPOINT
-logger = get_logger("silver", "silver_transform.log")
+logger = get_logger("silver", "/Volumes/workspace/transaction_data_pipeline/pipeline_logs/silver_transform.log")
 
 
 def create_spark_session():

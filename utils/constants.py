@@ -21,3 +21,4 @@ PAYMENT_CHECKPOINT = "/Volumes/workspace/transaction_data_pipeline/gold/checkpoi
 LOCATION_CHECKPOINT = "/Volumes/workspace/transaction_data_pipeline/gold/checkpoints/dim_location"
 DATE_CHECKPOINT = "/Volumes/workspace/transaction_data_pipeline/gold/checkpoints/dim_date"
 FACT_TRANSACTION_CHECKPOINT = "/Volumes/workspace/transaction_data_pipeline/gold/checkpoints/fact_transactions"
+VECTOR_STORE_PATH = "/Volumes/workspace/transaction_data_pipeline/rag/tables/transaction_vector_store"
