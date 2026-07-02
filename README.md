@@ -97,7 +97,7 @@ Realtime-Transaction-Pipeline
 
 ---
 
-# ⚙️ Technologies Used
+# Technologies Used
 
 | Technology | Purpose |
 |------------|---------|
